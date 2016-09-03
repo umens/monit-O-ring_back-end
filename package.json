@@ -1,0 +1,16 @@
+{
+  "name": "monit-O-ring_back-end",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "canihazip": "^1.0.1",
+    "debug": "latest",
+    "mongoose": "latest",
+    "morgan": "latest",
+    "socket.io": "latest",
+    "socket.io-client": "^1.4.8"
+  }
+}
