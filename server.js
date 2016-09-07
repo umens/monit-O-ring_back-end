@@ -18,7 +18,7 @@ socket.on('connect', function(){
     var usedMemory = Number((os.totalmem() - os.freemem()) / 1073741824).toFixed(4);
 
     cpu().then(function(cpuPercentage) {
-        socket.broadcast.emit('ehlo', { 
+        socket.emit('ehlo', { 
             cpu: cpuPercentage,
             totalMemory: totalMemory,
             freeMemory: freeMemory,
@@ -33,7 +33,7 @@ socket.on('connect', function(){
             totalMemory = Number(os.totalmem() / 1073741824).toFixed(4);
             freeMemory = Number(os.freemem() / 1073741824).toFixed(4);
             usedMemory = Number((os.totalmem() - os.freemem()) / 1073741824).toFixed(4);
-            socket.broadcast.emit('resources', { 
+            socket.emit('ressources', { 
                 cpu: cpuPercentage,
                 totalMemory: totalMemory,
                 freeMemory: freeMemory,
