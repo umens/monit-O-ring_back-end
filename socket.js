@@ -5,7 +5,7 @@ var conf = require('./config/conf');
 var connect = (io, os) => {  
     io.on('connect', (socket) => {
 
-        console.log('connected');
+        socket.emit('identifier', { serverName: conf.server_url });
         
         var totalMemory = os.totalmem();
         var freeMemory = os.freemem();
