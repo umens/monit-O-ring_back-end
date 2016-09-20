@@ -12,6 +12,8 @@ var socket = require('socket.io-client')(conf.url_front_end);
 //   	if (err) { throw err; }
 // });
 socket.on('connect', function(){
+
+    socket.emit('identifier', { serverName: conf.server_url });
         
     var totalMemory = Number(os.totalmem() / 1073741824).toFixed(4);
     var freeMemory = Number(os.freemem() / 1073741824).toFixed(4);
