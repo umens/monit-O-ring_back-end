@@ -7,26 +7,30 @@ var cpu    = require('./cpu');
 var conf   = require('./config/conf');
 var socket = require('socket.io-client')(conf.url_front_end);
 
-var cpuMonitor = new usage.CpuMonitor();
-
 socket.on('connect', function(){
+
+	var cpusData = null;
+	var cpuMonitor = new usage.CpuMonitor();
 
     socket.emit('identifier', { serverName: conf.server_url });
         
     var usedMemory = os.totalmem() - os.freemem();
 
-    cpuMonitor.on('cpuUsage', function(data) {
-	    socket.emit('ehlo', { 
+	// watch cpu usage overview
+	cpuMonitor.on('cpuUsage', function(data) {
+	    console.log(data);
+
+	    // { user: '9.33', sys: '56.0', idle: '34.66' }
+	});
+
+	socket.emit('ehlo', { 
             cpu: data,
             totalMemory: os.totalmem(),
             freeMemory: os.freemem(),
             usedMemory: usedMemory,
-            uptime: os.sysUptime();,
+            uptime: os.sysUptime(),
             hostname: conf.server_url
         });
-
-	    // { user: '9.33', sys: '56.0', idle: '34.66' }
-	});
 
     // cpu().then(function(cpuPercentage) {
     //     socket.emit('ehlo', { 
@@ -47,7 +51,7 @@ socket.on('connect', function(){
                 totalMemory: os.totalmem(),
                 freeMemory: os.freemem(),
                 usedMemory: usedMemory,
-                uptime: os.sysUptime();,
+                uptime: os.sysUptime(),
                 hostname: conf.server_url
             });
         });
