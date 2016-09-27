@@ -10,7 +10,6 @@
     "debug": "latest",
     "mongoose": "latest",
     "morgan": "latest",
-    "os-usage": "git+https://github.com/ningt/os-usage.git",
     "os-utils": "0.0.14",
     "socket.io": "latest",
     "socket.io-client": "^1.4.8"
