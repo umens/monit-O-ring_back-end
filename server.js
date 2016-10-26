@@ -12,30 +12,16 @@ socket.on('connect', function(){
         
     var usedMemory = os.totalmem() - os.freemem();
 
-	// watch cpu usage overview
-	os.cpuUsage(function(v){
-	    console.log( 'CPU Usage (%): ' + v );
-	});
-
-	socket.emit('ehlo', { 
-            cpu: data,
+    cpu().then(function(cpuPercentage) {
+        socket.emit('ehlo', { 
+            cpu: cpuPercentage,
             totalMemory: os.totalmem(),
             freeMemory: os.freemem(),
             usedMemory: usedMemory,
             uptime: os.sysUptime(),
             hostname: conf.server_url
         });
-
-    // cpu().then(function(cpuPercentage) {
-    //     socket.emit('ehlo', { 
-    //         cpu: cpuPercentage,
-    //         totalMemory: os.totalmem(),
-    //         freeMemory: os.freemem(),
-    //         usedMemory: usedMemory,
-    //         uptime: os.sysUptime();,
-    //         hostname: conf.server_url
-    //     });
-    // });
+    });
 
     setInterval(() => {
         cpu().then(function(cpuPercentage) {

@@ -68,11 +68,12 @@ module.exports = function () {
             percentageCPU = 100 - ~~(100 * idleDifference / totalDifference);
             percentages.push(percentageCPU);
             startMeasure = cpuAverage();
+            //console.log(percentages);
            
             resolve(percentages);
            
             //Output result to console
-            // console.log(percentageCPU + "%");
+            //console.log(percentageCPU + "%");
    
         }, 100);
    
